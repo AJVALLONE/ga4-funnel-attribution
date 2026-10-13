@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: fct_funnel_daily
+    description: >
+      Session funnel (view item → add to cart → begin checkout → purchase) by day,
+      device and channel. Steps count sessions where the event happened at least once.
+    columns:
+      - name: funnel_key
+        data_tests: [unique, not_null]
+      - name: session_conversion_rate
+        description: Purchase sessions / all sessions.
+
+  - name: fct_channel_attribution
+    description: >
+      Purchases and revenue by channel under first-touch, last non-direct touch, and linear
+      attribution, using a configurable lookback window (var lookback_days).
+    columns:
+      - name: model_channel_key
+        data_tests: [unique, not_null]
+      - name: model
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['first_touch', 'last_non_direct_touch', 'linear']
