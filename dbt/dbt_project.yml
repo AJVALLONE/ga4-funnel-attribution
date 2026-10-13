@@ -1,0 +1,24 @@
+name: ga4_funnel_attribution
+version: "1.0.0"
+config-version: 2
+profile: ga4_funnel_attribution
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+vars:
+  # The public dataset covers 2020-11-01 to 2021-01-31 (one daily table per day).
+  # Narrow this range while developing to scan less data.
+  start_date: "20201101"
+  end_date: "20210131"
+  # How far back a purchase looks for earlier sessions to credit.
+  lookback_days: 30
+
+models:
+  ga4_funnel_attribution:
+    # Everything is a table: GA4's raw data is large and nested, so we flatten it once
+    # and let every later model read the small, flat result instead.
+    +materialized: table

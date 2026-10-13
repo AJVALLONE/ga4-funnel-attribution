@@ -1,0 +1,13 @@
+# No secrets here: authentication uses `gcloud auth application-default login`.
+ga4_funnel_attribution:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: oauth
+      project: "{{ env_var('GCP_PROJECT', 'set-gcp-project') }}"
+      dataset: ga4_analytics
+      # Must be US: the public GA4 dataset lives in the US multi-region.
+      location: US
+      threads: 4
+      job_execution_timeout_seconds: 600
