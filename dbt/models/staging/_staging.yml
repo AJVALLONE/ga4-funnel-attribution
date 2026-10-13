@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: stg_ga4__events
+    description: Flattened GA4 events. One row per event.
+    columns:
+      - name: event_date
+        data_tests: [not_null]
+      - name: event_name
+        data_tests: [not_null]
+      - name: user_pseudo_id
+        description: GA4's anonymous browser/device ID. Not a person; one person can have several.
+        data_tests: [not_null]
+      - name: session_key
+        description: user_pseudo_id + ga_session_id. GA4 has no single session ID column.
+      - name: purchase_revenue
+        description: Revenue in USD on purchase events, 0 on every other event.
