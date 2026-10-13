@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: int_ga4__sessions
+    description: One row per session with traffic source, channel, funnel flags and revenue.
+    columns:
+      - name: session_key
+        data_tests: [unique, not_null]
+      - name: channel
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Direct', 'Organic Search', 'Paid Search', 'Display', 'Organic Social',
+                         'Email', 'Affiliates', 'Referral', 'Unassigned']
+
+  - name: int_ga4__conversion_paths
+    description: >
+      One row per (purchase session, earlier session) pair within the lookback window.
+      The purchase session itself is always included, so every path has at least one touch.
+    columns:
+      - name: conversion_session_key
+        data_tests: [not_null]
+      - name: touch_number
+        description: 1 = the earliest session in the path.
+      - name: path_length
+        description: Number of sessions in the path, including the purchase session.
