@@ -1,0 +1,7 @@
+dbt-core>=1.11,<1.12
+dbt-bigquery>=1.11,<1.12
+google-cloud-bigquery[pandas]>=3.25
+db-dtypes>=1.2
+pyarrow>=14
+pandas>=2.1
+matplotlib>=3.8

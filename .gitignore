@@ -1,0 +1,12 @@
+.env
+*.json.key
+service-account*.json
+dbt/target/
+dbt/logs/
+dbt/dbt_packages/
+dbt/.user.yml
+logs/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
